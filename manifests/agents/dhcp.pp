@@ -122,7 +122,7 @@ class neutron::agents::dhcp (
   case $dhcp_driver {
     /\.Dnsmasq/: {
       Package[$::neutron::params::dnsmasq_packages] -> Package<| title == 'neutron-dhcp-agent' |>
-      ensure_packages($::neutron::params::dnsmasq_packages)
+      ensure_resource('package', $::neutron::params::dnsmasq_packages, {'ensure' => 'latest' })
     }
     /^midonet.*/: {
       ensure_packages($::neutron::params::midonet_server_package)
